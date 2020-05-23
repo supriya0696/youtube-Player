@@ -1,0 +1,33 @@
+<div id="contents" class = "container">
+    <div id="outerCommentBox" class= "row" >
+        <div id = "commnetSection" class="section">
+            <div id="countComment" class="commentCount"> {{this.commentRes.length}} Comment</div>
+          <app-self-comment></app-self-comment>
+            <div id="mainCommentBox" class="row" *ngFor="let item of this.commentRes; index as i;">
+                   <img class="img" src="{{item.snippet.topLevelComment.snippet.authorProfileImageUrl}}" />
+                    <div id="commentDetailsContainer" class="commentDetailsContainer">
+                    <div id="commentorName" class="commentorName">
+                        {{item.snippet.topLevelComment.snippet.authorDisplayName}}
+                    </div>
+                    <div id="commentMessage" class="commmentMessage">
+                        {{item.snippet.topLevelComment.snippet.textDisplay}}
+                    </div>
+                    <div class="likeDiv">
+                    <div class="img">
+                        <img class="like" src="../assets/image/up.png"> 
+                    </div>
+                    <div class="likeCount">{{item.snippet.topLevelComment.snippet.likeCount}}</div>
+
+                    <div  class="img">
+                        <img class="" src="../assets/image/down.png">
+                    </div>
+                    </div>
+                    
+                </div>
+                <!-- </div> -->
+            </div>
+            </div>
+        </div> 
+
+</div>
+

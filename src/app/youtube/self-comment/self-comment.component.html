@@ -1,0 +1,19 @@
+<form [formGroup]="commentForm"  (ngSubmit)="onComment(commentForm)">
+    <div class="form-group">
+        <label for="comment">Username</label>
+        <div class="row">
+            <img class="img" src="../assets/image/123.jpg" />>
+            <input type="comment" placeholder="Commenting publicly as Supriya Sinha" (keydown)="callHiddenDiv(commentForm)" (click)="callHiddenDiv(commentForm)" formControlName="comment" class="form-control w-155 row-6" required comment/>
+            </div>
+        <div class="form-group row" [hidden]="this.isHidden">
+            <label for="username11" class="label">By completing this action you are creating a channel and agree to ​YouTube's Terms of Service.
+            </label>
+            <button type="button" class="btn btn-primary m-2" (click)="onCancel()">
+               CANCEL</button>
+               <!-- <span *ngIf="isDisable">  -->
+            <button id="comment" [disabled]="this.isDisable" class="btn btn-primary m-2">
+             COMMENT </button>
+            <!-- </span> -->
+        </div>
+    </div>
+</form>

@@ -10,7 +10,18 @@ import { SafePipe } from './youtube/safe.pipe';
 import { NgxSpinnerModule } from "ngx-spinner"; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommentSectionComponent } from './youtube/comment-section/comment-section.component';
-import { SelfCommentComponent } from './youtube/self-comment/self-comment.component'; 
+import { SelfCommentComponent } from './youtube/self-comment/self-comment.component';
+import { MovieStateService } from './model/movie-state.service';
+import { YoutubeApiService } from './services/youtube-api.service';
+// import { Store } from '@ngrx/store';
+import { NgxsModule } from '@ngxs/store';
+import {MovieState} from 'src/app/model/movie.state'
+import { environment } from 'src/environments/environment.prod';
+import { SearchComponent } from './youtube/search/search.component';
+import { SearchPipe } from './youtube/search.pipe';
+import { FormsModule } from '@angular/forms';
+import { SearchListingPageComponent } from './youtube/search-listing-page/search-listing-page.component';
+import { NavigationMenuComponent } from './youtube/navigation-menu/navigation-menu.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +31,10 @@ import { SelfCommentComponent } from './youtube/self-comment/self-comment.compon
     SafePipe,
     CommentSectionComponent,
     SelfCommentComponent,
+    SearchComponent,
+    SearchPipe,
+    SearchListingPageComponent,
+    NavigationMenuComponent,
   
   ],
   imports: [
@@ -28,9 +43,15 @@ import { SelfCommentComponent } from './youtube/self-comment/self-comment.compon
     ReactiveFormsModule,
     HttpClientModule,
     NgxSpinnerModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule,
+    // Store,
+    NgxsModule.forRoot([MovieState],{
+      developmentMode: !environment.production 
+    }),
   ],
-  providers: [ 
+  providers: [ MovieStateService,YoutubeApiService,SearchPipe
+
     // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]

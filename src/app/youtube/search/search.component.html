@@ -1,0 +1,14 @@
+<div class="input-group mb-3">
+    <input type="text" class="form-control"  [(ngModel)]="searchVideo" 
+     placeholder="Search">
+    <div class="input-group-append">
+      <button class="btn btn-success" type="submit"  (click)="searchVideoByName(searchVideo)" *ngIf="searchVideo">Go</button>
+      <button  class="icon-ge-close close-icon" *ngIf="!searchVideo"
+      (click)="clearField()"></button>
+    </div>
+  </div>
+  <div *ngIf="navigateToSearchingListPage">
+      <app-search-listing-page [searchVideoData]="searchVideoData"></app-search-listing-page>
+  </div>
+  <ngx-spinner bdColor="rgba(255, 255, 255, 0.8)" size="large" color="#3E87E8" type="ball-spin-clockwise"></ngx-spinner> 
+           

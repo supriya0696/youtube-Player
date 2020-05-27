@@ -13,7 +13,7 @@ export class SelfCommentComponent implements OnInit , OnChanges {
   commentForm: FormGroup;
   // commentData= commentApi
   isHidden: boolean = true;
-  comment:CommentModelData[]=[]
+  comment:[]
   isDisable:boolean=false;
   commentArea:'';
   constructor(  private formBuilder : FormBuilder,
@@ -21,7 +21,7 @@ export class SelfCommentComponent implements OnInit , OnChanges {
 
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
+    console.error(changes)
     this.isDisable=true
     this. commentForm.valueChanges 
             .subscribe((changes: any) => {
@@ -42,11 +42,11 @@ export class SelfCommentComponent implements OnInit , OnChanges {
     this.isHidden=true;
   }
 
-  onComment(commentData : CommentModelData){
-    this.comment = commentData.controls.comment.value;
-    if(this.comment.length>0){
-      this.isDisable= false;
-    }
+  onComment(commentData ){
+    // this.comment = commentData.controls.comment.value;
+    // if(this.comment.length>0){
+    //   this.isDisable= false;
+    // }
      let cmnt ={
       "authorDisplayName":"supriya",
       "authorProfileImageUrl":"https://yt3.ggpht.com/a/AATXAJznot1ObyvO4mAEFnFMZJIe28lrsHBEX95okw=s48-c-k-c0xffffffff-no-rj-mo",
@@ -61,7 +61,8 @@ export class SelfCommentComponent implements OnInit , OnChanges {
       "publishedAt":"2020-04-24T10:29:41.000Z",
       "updatedAt":"2020-04-24T10:29:41.000Z"
     }
-    this.youtubeApiService.postCommentJsonData(cmnt)
+    let data=this.youtubeApiService.postCommentJsonData(cmnt)
+    console.log(data)
 
   }
 

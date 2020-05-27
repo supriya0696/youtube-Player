@@ -1,0 +1,10 @@
+
+<div class="list-group">
+    <div class="list-group-item" *ngIf="let item of this.searchVideoData;let i=index;">
+    <div class="container">
+        <div class="carousal">
+            {{item.item.snippet.thumbnails.medium.url}}
+        </div>
+        </div>
+    </div>
+</div>

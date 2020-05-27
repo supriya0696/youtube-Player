@@ -11,13 +11,14 @@ export class YoutubeApiService {
   channelId='UCq-Fj5jknLsUf-MWSy4_brA'
   constructor(private http : HttpClient) { }
 
-  fetchYoutubeAPI(){
-    return this.http.get(' https://www.googleapis.com/youtube/v3/search?key=AIzaSyCki2sTYFJNQ-5WyhRN6sBgS4Aw6oIflNQ&channelId=UCq-Fj5jknLsUf-MWSy4_brA&part=snippet,id&order=date&maxResults=20')
-    .pipe(map(res =>{
-      console.log(res);
-      return res;
-    }))
-
+  async fetchYoutubeAPI(){
+    const url = ' https://www.googleapis.com/youtube/v3/search?key=AIzaSyCki2sTYFJNQ-5WyhRN6sBgS4Aw6oIflNQ&channelId=UCq-Fj5jknLsUf-MWSy4_brA&part=snippet,id&order=date&maxResults=20';
+    return await this.http.get(url).toPromise().then(res=>console.log(res));
+    // .pipe(map(res =>{
+    //   console.log(res);
+    //   return res;
+    // }))
+    // https://www.googleapis.com/youtube/v3/search?type=video&part=snippet&order=viewCount&q=salman&maxResults=3&key=AIzaSyCki2sTYFJNQ-5WyhRN6sBgS4Aw6oIflNQ//search api
     // https://www.googleapis.com/youtube/v3/search?key=AIzaSyBgNcm2_Qj_-CMliE-7PPTvEjsDrZoeokQ&channelId=UCq-Fj5jknLsUf-MWSy4_brA&part=snippet,id&order=date&maxResults=40
 //     https://www.googleapis.com/youtube/v3/search?key=AIzaSyBgNcm2_Qj_-CMliE-7PPTvEjsDrZoeokQ&channelId=UCsT0YIqwnpJCM-mx7-gSA4Q&part=snippet,id&order=date&maxResults=20
 //     https://www.googleapis.com/youtube/v3/videos?part=snippet,id&order=date&chart=mostPopular&regionCode=IN&maxResults=25&key=AIzaSyBgNcm2_Qj_-CMliE-7PPTvEjsDrZoeokQ
@@ -45,9 +46,9 @@ export class YoutubeApiService {
   }
 
   public getCommentJsonData(videoID) {
-    let url ="https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyCki2sTYFJNQ-5WyhRN6sBgS4Aw6oIflNQ&textFormat=plainText&part=snippet&maxResults=50&videoId="
-    const fullUrl=`${url}${videoID}`
-    return this.http.get(fullUrl)
+    let url ="https://www.googleapis.com/youtube/v3/commentThreads?key=AIzaSyCki2sTYFJNQ-5WyhRN6sBgS4Aw6oIflNQ&textFormat=plainText&part=snippet&maxResults=50&videoId="+videoID
+    // const fullUrl=`${url}${videoID}`
+    return this.http.get(url)
     .pipe(map(res=>{
     return res;
         }))
@@ -55,11 +56,19 @@ export class YoutubeApiService {
   }
 
   public postCommentJsonData(data) {
-    let commentData = require('../../assets/mock-json/comment-api.json');
+    // let commentData = require('../../assets/mock-json/comment-api.json');
     // return this.http.post('../../assets/mock-json/comment-api.json',data).subscribe(res =>{
     //   console.log("posted succesfully ")
     // })
-    commentData.push(data);
+    // return commentData.push(data);
 
   }
+   public searchApi(searchData){
+     let url='https://www.googleapis.com/youtube/v3/search?type=video&part=snippet&order=viewCount&q='+searchData+'&maxResults=3&key=AIzaSyCki2sTYFJNQ-5WyhRN6sBgS4Aw6oIflNQ'
+     return this.http.get(url).pipe(map(res=>{
+       console.log(res)
+       return res;
+     })
+     )
+   }
 }

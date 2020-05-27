@@ -4,6 +4,10 @@ import { itemClicked as _itemClicked } from 'lodash';
 import { SafeUrl } from '@angular/platform-browser'
 import { DomSanitizer } from "@angular/platform-browser";
 import { NgxSpinnerService } from "ngx-spinner"; 
+import {MovieStateService} from 'src/app/model/movie-state.service';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { MovieState } from 'src/app/model/movie.state';
 // import { listeners } from 'cluster';
 
 @Component({
@@ -43,7 +47,7 @@ export class YoutubeComponent implements OnInit {
   }
   loopItem: any = [];
   list: any = [];
-  videoId = 'uXLwhNZoUaQ'
+  videoId = ''
   iframeURL = 'https://www.youtube.com/embed/';
   trustedDashboardUrl: SafeUrl;
   videoTitle = ''
@@ -54,109 +58,39 @@ export class YoutubeComponent implements OnInit {
   YT: any
   itemclickTime: any;
   page: number = 1
-  apiData: any = [];
+  apiData: any ;
 
   constructor(public youtubeServices: YoutubeApiService,
     private sanitizer: DomSanitizer,
     private ngZone: NgZone,
-    private SpinnerService: NgxSpinnerService) {
+    private SpinnerService: NgxSpinnerService,
+    private movieState:MovieStateService) {
     
   }
+  // @Select(MovieState.fetchYoutubeApiData) fetchYouTubeAPI: Observable<any>;
 
 
   ngOnInit() {
+    this.videoId = 'gNCPrTGU6GI'
     this.itemclickTime = 1
     this.player = this.sanitizer.bypassSecurityTrustResourceUrl(this.iframeURL + this.videoId);
     this.videoTitle ="The Story of Human Migration: Your Life in a Tooth | Carolyn Freiwald | TEDxUniversityofMississippi"
     this.video= 'uXLwhNZoUaQ'
     this.SpinnerService.show();
-    this.youtubeServices.fetchYoutubeAPI().subscribe(res => {
-      this.SpinnerService.hide(); 
-      this.apiData = res;
-      this.loopItem = this.apiData.items
-    })
+    // console.log(this.fetchYouTubeAPI)
+    // this.movieState.fetchYoutubeAPI().subscribe(res => {
+    //   this.SpinnerService.hide(); 
+    //   console.log(res)
+    //   this.apiData = res;
+    //   this.loopItem = this.apiData
+    // })
     // this.SpinnerService.show(); 
-    // this.res = this.youtubeServices.fetchStaticJson()
-    // this.apiData = this.res;
-    // this.loopItem = this.apiData.items
-    // this.SpinnerService.hide(); 
+    this.res = this.youtubeServices.fetchStaticJson()
+    this.apiData = this.res;
+    this.loopItem = this.apiData.items
+    this.SpinnerService.hide(); 
     // })
 
-  }
-
-
-  startVideo(video) {
-    this.player = new window['YT'].Player('player', {
-      width: 680,
-      height: 420,
-      videoId: video,
-      playerVars: {
-        autoplay: 1,
-        modestbranding: 1,
-        controls: 1,
-        disablekb: 1,
-        rel: 0,
-        showinfo: 0,
-        fs: 0,
-        playsinline: 1
-      },
-      events: {
-        'onStateChange': (event) => this.ngZone.run(() => this.onPlayerStateChange(event)),
-        // 'onStateChange' :(event)=> this.onPlayerStateChange.bind(event),
-        'onError': (event) => this.ngZone.run(() => this.onPlayerError(event)),
-        'onReady': (event) => this.ngZone.run(() => this.onPlayerReady(event))
-      }
-    })
-
-    this.onPlayerStateChange(event);
-  }
-
-  onPlayerReady(event) {
-    event.target.playVideo();
-    console.log("----->" + event)
-    // event.target.playVideo()
-  }
-
-  onPlayerStateChange(event) {
-    console.log("nto thi", event)
-    // event.target.playVideo();
-    switch (event.data) {
-      case window['YT'].PlayerState.UNSTARTED:
-        if (this.cleanTime() == 0) {
-          console.log('------>' + this.cleanTime())
-        } else {
-          console.log('------>' + this.cleanTime())
-        }
-        break;
-      case window['YT'].PlayerState.PAUSED:
-        if (this.player.getDuration() - this.player.getCurrentTime() != 0) {
-          console.log('------>' + this.cleanTime());
-        }
-        break;
-      case window['YT'].PlayerState.ENDED:
-        console.log('....>');
-        break;
-      case window['YT'].PlayerState.PLAYING:
-        console.log("palting");
-        break;
-    }
-  }
-
-  cleanTime() {
-    return Math.round(this.player.getCurrentTime())
-  }
-
-
-  onPlayerError(event) {
-    switch (event.data) {
-      case 2:
-        console.log('.....' + this.video)
-        break;
-      case 100:
-        break;
-      case 101 || 150:
-        break;
-    }
   }
  
   onBtnClick(playerUrl) {

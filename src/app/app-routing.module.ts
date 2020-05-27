@@ -3,14 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 // import { LoginComponentComponent } from './login-component/login-component.component';
 import { YoutubeComponent } from './youtube/youtube/youtube.component';
 import { AppComponent } from './app.component';
+import { SearchListingPageComponent } from './youtube/search-listing-page/search-listing-page.component';
 
 
-const routes: Routes = [];
 
-// export const appRoutes: Routes = [
-//   { path: '', component: AppComponent, pathMatch: 'full' },
-//   { path: 'test', component: YoutubeComponent, pathMatch: 'full' }
-// ];
+
+const routes: Routes = [
+  { path: '', redirectTo: 'employee', pathMatch: 'full' },
+  { path: 'searchList', component: SearchListingPageComponent },
+ 
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

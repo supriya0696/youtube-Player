@@ -2,13 +2,18 @@
     <input type="text" class="form-control"  [(ngModel)]="searchVideo" 
      placeholder="Search">
     <div class="input-group-append">
-      <button class="btn btn-success" type="submit"  (click)="searchVideoByName(searchVideo)" *ngIf="searchVideo">Go</button>
-      <button  class="icon-ge-close close-icon" *ngIf="!searchVideo"
+      <button class="btn btn-success" type="submit"  (click)="searchVideoByName(searchVideo)" >Go
+        <!-- <a routerLink="/searchList" routerLinkActive="active">Contact</a> -->
+      </button>
+      <button  class="icon-ge-close close-icon" 
       (click)="clearField()"></button>
     </div>
   </div>
-  <div *ngIf="navigateToSearchingListPage">
-      <app-search-listing-page [searchVideoData]="searchVideoData"></app-search-listing-page>
+  <div class="listing_screen" *ngIf="navigateToSearchingListPage">
+    
+    <app-navigation-menu ></app-navigation-menu>
+      <app-search-listing-page  [searchData]="searchData" [searchVideoData]="searchVideoData" ></app-search-listing-page>
   </div>
   <ngx-spinner bdColor="rgba(255, 255, 255, 0.8)" size="large" color="#3E87E8" type="ball-spin-clockwise"></ngx-spinner> 
            
+     

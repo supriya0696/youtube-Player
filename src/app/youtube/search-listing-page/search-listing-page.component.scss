@@ -1,0 +1,25 @@
+.list-group{
+    width: 169%;                     
+    .list-group-item{
+        background-color: cornsilk;
+        .container{
+            .carousal{
+                padding: 14px;
+                .outer_div{
+                    .inner_div{
+                        display: flex;
+                        .img{
+                            border:3px solid black;
+                        }
+                        .video_Details{
+                            margin-left: 26px;
+                        .song_details{
+                            padding:10px
+                        }
+                    }
+                    }
+                }
+            }
+        }
+    }
+}

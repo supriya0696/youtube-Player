@@ -10,6 +10,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 export class SearchComponent implements OnInit {
   searchVideo: string = '';
   searchVideoData:any=[];
+  searchData:any;
   navigateToSearchingListPage:boolean=false;
   constructor(public searchPipe : SearchPipe,
               public youtubeApiService:YoutubeApiService,
@@ -23,14 +24,20 @@ export class SearchComponent implements OnInit {
   }
   searchVideoByName(searchData){
     console.log(searchData)
+    this.searchData=searchData
     this.ngxSpinnerService.show()
     this.navigateToSearchingListPage=true;
     this.youtubeApiService.searchApi(searchData).subscribe(res=>{
-      console.log(res) 
-    this.searchVideoData=res;
-
       this.ngxSpinnerService.hide();
+      console.log(res) 
+      this.searchVideoData=res;      
     })
+    // let data =this.youtubeApiService.staticSearchApi(searchData)
+    //   this.ngxSpinnerService.hide();
+    //   console.log(data) 
+    //   this.searchVideoData=data;      
+    // })
+
   }
 
 }

@@ -9,7 +9,8 @@ import { SearchListingPageComponent } from './youtube/search-listing-page/search
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'employee', pathMatch: 'full' },
+  // { path: '', redirectTo: 'employee', pathMatch: 'full' },
+  // { path: '',  component: YoutubeComponent },
   { path: 'searchList', component: SearchListingPageComponent },
  
 ];

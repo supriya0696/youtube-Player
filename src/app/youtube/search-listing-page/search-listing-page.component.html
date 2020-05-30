@@ -1,9 +1,17 @@
 
 <div class="list-group">
-    <div class="list-group-item" *ngIf="let item of this.searchVideoData;let i=index;">
+    <div class="list-group-item" >
     <div class="container">
-        <div class="carousal">
-            {{item.item.snippet.thumbnails.medium.url}}
+        <div class="carousal" *ngFor="let item of this.data;index as i;">
+            <div class="outer_div">
+                <div class="inner_div">
+                    <img class="img" src="{{this.data[i].snippet.thumbnails.medium.url}}"/>
+                    <div class="video_Details">  <span style="font-size: larger;">{{this.data[i].snippet.title}}</span>
+                    <span class="song_details">  {{this.data[i].snippet.description}}</span>
+                </div>
+                </div>
+            </div>
+          
         </div>
         </div>
     </div>

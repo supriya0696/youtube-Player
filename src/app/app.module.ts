@@ -22,6 +22,7 @@ import { SearchPipe } from './youtube/search.pipe';
 import { FormsModule } from '@angular/forms';
 import { SearchListingPageComponent } from './youtube/search-listing-page/search-listing-page.component';
 import { NavigationMenuComponent } from './youtube/navigation-menu/navigation-menu.component';
+import { YoutubePlayerComponent } from './youtube/youtube-player/youtube-player.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { NavigationMenuComponent } from './youtube/navigation-menu/navigation-me
     SearchPipe,
     SearchListingPageComponent,
     NavigationMenuComponent,
+    YoutubePlayerComponent,
   
   ],
   imports: [

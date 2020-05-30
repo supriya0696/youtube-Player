@@ -18,37 +18,3 @@
     }
 }
 
-.videoTitle{
-    background-color: white;
-    font-weight: 600px;
-    font-style: italic;
-    font-size: x-large;
-    width: 660px;
-}
-.item-holder{
-    float: right;
-    margin: 20px;
-    // overflow-y: scroll;
-    // height: 900px;
-.item{
-    display: flex;
-    margin-bottom: 20px;
-    overflow: hidden;
-    width: 350px;
-    background: whitesmoke;
-    border: 6px solid blue;
-    height: 200px; 
-    .imageCls{
-        height:190px
-    }
-    .imageTitle{
-        margin-top: -51px;
-        color: white;
-        font-weight: 600;
-        z-index: 2;
-    } 
-}
-.showBtn{
-    position: relative;
-}
-}

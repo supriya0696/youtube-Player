@@ -71,4 +71,8 @@ export class YoutubeApiService {
      })
      )
    }
+   public staticSearchApi(searchData){
+    let data = require('../../assets/mock-json/search.json');
+    return data
+  }
 }

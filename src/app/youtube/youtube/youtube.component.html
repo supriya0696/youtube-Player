@@ -9,34 +9,7 @@
                 </div>
 
             </div>
-            <div class="row">
-                <div class="col-md-8">
-                    <div id="youtube" style="margin-bottom: 25px;margin-top: 113px">
-                        <!-- <div id="player"></div> -->
-                        <iframe width="800" height="500" [src]="player" frameborder="0"
-                            allow="accelerometer;autoplay;encrypted-media; gyroscope;picture-in-picture"
-                            allowfullscreen></iframe>
-
-                    <!-- <iframe class="e2e-iframe-untrusted-src" width="640" height="390" [src]="video"></iframe> -->
-                    </div>
-                    <div class="videoTitle"><em><b>{{this.videoTitle}}</b></em></div>
-                    <app-comment-section [apiData]="apiData" [videoId]="videoId"></app-comment-section>
-                </div>
-                <div class="col-md-4">
-                    <div class="item-holder" (scroll)="onScroll($event)">
-                        <div #myDiv id="items" (click)="itemClicked(item)" class="item" *ngFor="let item of this.loopItem; index as i;"
-                          >
-                            <div id="imagePlaceholder">
-                                <img class="imageCls" *ngIf="!!item.snippet"
-                                    src="{{item.snippet.thumbnails.medium.url}}" />
-                                <div id="title" class="imageTitle"> {{this.loopItem[i].snippet.title}}</div>
-                            </div>
-                        </div>
-
-                        <button #showMore class="btn btn-primary m-2 showBtn" (click)="showMoreContent()">SHOW MORE CONTENTS</button>
-                    </div>
-                </div>
-            </div>
+ <app-youtube-player></app-youtube-player>
 
         </div>
     </div>

@@ -12,6 +12,7 @@ export class CommentSectionComponent implements OnInit,OnChanges {
   commentRes:any=[]
   @Input() apiData = [];
   @Input() videoId;
+  data:any;
   // @Output()   itemClicked = new EventEmitter();
   // videoId = 'uXLwhNZoUaQ';
 
@@ -20,7 +21,6 @@ export class CommentSectionComponent implements OnInit,OnChanges {
 
   ngOnInit(): void {
     console.log(this.apiData)
-    // this.itemClicked.emit(this.videoId)
     this.SpinnerService.show();
     this.youtubeApiService.getCommentJsonData(this.videoId).subscribe((res:any)=>{
       this.SpinnerService.hide();
@@ -30,16 +30,18 @@ export class CommentSectionComponent implements OnInit,OnChanges {
     });
   }
 
-  ngOnChanges(change: SimpleChanges){
-    if(change.apiData.currentValue != change.apiData.previousValue){
-    console.log(change)
-
-    this.youtubeApiService.getCommentJsonData(this.videoId).subscribe((res:any)=>{
-      this.SpinnerService.hide();
-      this.commentRes=res.items
-      console.log(this.commentRes)
-    });
-  }
+  ngOnChanges(changes: {[propKey: string]: SimpleChange}){
+    debugger
+    let log: string[] = [];
+    for (let propName in changes) {
+      let changedProp = changes[propName];
+      this.videoId = (changedProp.currentValue);   
+      this.youtubeApiService.getCommentJsonData(this.videoId).subscribe((res:any)=>{
+        this.SpinnerService.hide();
+        this.commentRes=res.items
+        console.log(this.commentRes)
+      });
+    }
   }
 
 }
